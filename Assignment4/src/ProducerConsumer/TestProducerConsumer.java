@@ -1,10 +1,10 @@
 package ProducerConsumer;
 
-public class ProducerConsumerTest
+public class TestProducerConsumer
 {
   public static void main(String[] args)
   {
-    Deposit deposit = new Deposit(20);
+    Deposit deposit = new Deposit(50);
 
     for (int i = 0; i < 3; i++)
     {

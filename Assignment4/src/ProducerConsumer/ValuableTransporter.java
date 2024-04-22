@@ -1,7 +1,5 @@
 package ProducerConsumer;
 
-import Mine.Valuable;
-
 public class ValuableTransporter implements Runnable
 {
   private Deposit deposit;

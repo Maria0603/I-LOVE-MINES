@@ -1,8 +1,5 @@
 package ProducerConsumer;
 
-import Mine.Valuable;
-import Mine.ValuableFactory;
-
 public class Miner implements Runnable
 {
   private Deposit deposit;
@@ -14,18 +11,8 @@ public class Miner implements Runnable
   {
     while(true)
     {
-      Valuable valuable;
-      double random=Math.random();
-      if(random<0.2)
-        valuable = ValuableFactory.getValuable("diamond");
-      else if(random<0.4)
-        valuable = ValuableFactory.getValuable("goldenNugget");
-      else if(random<0.6)
-        valuable = ValuableFactory.getValuable("jewel");
-      else if(random<0.8)
-        valuable = ValuableFactory.getValuable("ruby");
-      else valuable = ValuableFactory.getValuable("woodenCoin");
-
+      Logger.getInstance().addLog(Thread.currentThread().getName() + " is digging.");
+      Valuable valuable=dig();
       Logger.getInstance().addLog(Thread.currentThread().getName() + " found a valuable: "+ valuable);
       deposit.depositValuable(valuable);
       try
@@ -37,5 +24,18 @@ public class Miner implements Runnable
         //
       }
     }
+  }
+  private Valuable dig()
+  {
+    double random=Math.random();
+    if(random<0.2)
+      return Valuable.getInstance("diamond");
+    else if(random<0.4)
+      return Valuable.getInstance("golden nugget");
+    else if(random<0.6)
+      return Valuable.getInstance("jewel");
+    else if(random<0.8)
+      return Valuable.getInstance("ruby");
+    return Valuable.getInstance("wooden coin");
   }
 }
