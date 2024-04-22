@@ -1,6 +1,7 @@
 package Mine;
 
-public class WoodenCoin implements Valuable {
+public class WoodenCoin implements Valuable
+{
   private String name;
   private int value;
 
@@ -9,11 +10,15 @@ public class WoodenCoin implements Valuable {
     this.value = value;
   }
 
-  @Override public String getName() {
+   public String getName() {
     return name;
   }
 
-  @Override public int getValue() {
+   public int getValue() {
     return value;
+  }
+   public String toString()
+  {
+    return name + ": " + value;
   }
 }

@@ -1,19 +1,29 @@
 package Mine;
 
-public class Ruby implements Valuable {
+public class Ruby implements Valuable
+{
   private String name;
   private int value;
 
-  public Ruby(String name,int value) {
+  public Ruby(String name, int value)
+  {
     this.name = name;
     this.value = value;
   }
 
-  @Override public String getName() {
+  public String getName()
+  {
     return name;
   }
 
-  @Override public int getValue() {
+  public int getValue()
+  {
     return value;
   }
+
+  public String toString()
+  {
+    return name + ": " + value;
+  }
+
 }

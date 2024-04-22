@@ -1,4 +1,4 @@
-package DepositStuff;
+package ProducerConsumer;
 
 /**
  * DepositStuff.ArrayList is an implementation of interface DepositStuff.ListADT (the interface to a list

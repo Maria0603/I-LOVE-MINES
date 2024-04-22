@@ -11,13 +11,17 @@ public class Diamond implements Valuable
     this.value = value;
   }
 
-  @Override public String getName()
+   public String getName()
   {
     return name;
   }
 
-  @Override public int getValue()
+   public int getValue()
   {
     return value;
+  }
+   public String toString()
+  {
+    return name + ": " + value;
   }
 }

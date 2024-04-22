@@ -5,15 +5,18 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ValueFactory
+public class ValuableFactory
 {
-  private static Map<String, Valuable> valuableMap = new HashMap<>();
-  private static Lock lock = new ReentrantLock();
+  private static Map<String, Valuable> valuableMap=new HashMap<>();
+  private static Lock lock=new ReentrantLock();
+  private ValuableFactory()
+  {
 
-  private static Valuable getValuable(String name)
+  }
+
+  public static Valuable getValuable(String name)
   {
     Valuable valuable = valuableMap.get(name.toLowerCase());
-
     if (valuable == null)
     {
       synchronized (lock)
@@ -21,18 +24,18 @@ public class ValueFactory
         valuable = valuableMap.get(name);
 
         if (valuable == null) {
-          switch (name.toLowerCase().trim()) {
+          switch (name) {
             case "diamond":
-              valuable = new Diamond("diamond", 100);
+              valuable = new Diamond("diamond", 80);
               break;
             case "goldenNugget":
-              valuable = new GoldenNugget("goldNugget", 75);
+              valuable = new GoldenNugget("goldenNugget", 45);
               break;
             case "jewel":
-              valuable = new Jewel("jewel", 50);
+              valuable = new Jewel("jewel", 25);
               break;
             case "ruby":
-              valuable = new Ruby("ruby", 25);
+              valuable = new Ruby("ruby", 20);
               break;
             case "woodenCoin":
               valuable = new WoodenCoin("woodenCoin", 5);
