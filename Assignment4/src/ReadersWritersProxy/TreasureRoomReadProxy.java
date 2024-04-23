@@ -2,19 +2,24 @@ package ReadersWritersProxy;
 
 import ProducerConsumer.Valuable;
 
-public class TreasureRoomReadProxy implements ReadList{
+public class TreasureRoomReadProxy implements ReadTreasureRoom
+{
 
-    private TreasureRoom treasureRoom;
-    private Guardsman access;
-    public TreasureRoomReadProxy(TreasureRoom treasureRoom, Guardsman access){
-        this.treasureRoom = treasureRoom;
-        this.access = access;
-    }
-    @Override
-    public Valuable read() {
-        if(access.hasReadAccess(Thread.currentThread()))
-            throw new IllegalStateException("Thread is not on the list");
+  private TreasureRoom treasureRoom;
 
+  public TreasureRoomReadProxy(TreasureRoom treasureRoom)
+  {
+    this.treasureRoom = treasureRoom;
+  }
+
+  @Override public Valuable read()
+  {
+    if (treasureRoom!=null)
         return treasureRoom.read();
-    }
+    throw new IllegalStateException("Access denied.");
+  }
+  public void terminate()
+  {
+      treasureRoom=null;
+  }
 }

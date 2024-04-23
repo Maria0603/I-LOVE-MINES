@@ -4,9 +4,8 @@ import ProducerConsumer.ArrayList;
 import ProducerConsumer.ListADT;
 import ProducerConsumer.Valuable;
 
-import javax.xml.transform.Transformer;
-
-public class TreasureRoom implements ReadWriteList{
+public class TreasureRoom implements ReadAddRetrieveTreasureRoom
+{
     private ListADT<Valuable> list;
     public TreasureRoom(){
         list = new ArrayList<>();

@@ -2,7 +2,7 @@ package ReadersWritersProxy;
 
 import ProducerConsumer.Valuable;
 
-public interface ReadWriteList extends ReadList {
+public interface ReadAddTreasureRoom extends ReadTreasureRoom
+{
     void add(Valuable v);
-    Valuable retrieve(Valuable v);
 }
