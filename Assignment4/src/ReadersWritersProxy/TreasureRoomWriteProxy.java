@@ -2,11 +2,11 @@ package ReadersWritersProxy;
 
 import ProducerConsumer.Valuable;
 
-public class TreasureRoomRetrieveProxy implements ReadAddRetrieveTreasureRoom
+public class TreasureRoomWriteProxy implements WriteTreasureRoom
 {
   private TreasureRoom treasureRoom;
 
-  public TreasureRoomRetrieveProxy(TreasureRoom treasureRoom)
+  public TreasureRoomWriteProxy(TreasureRoom treasureRoom)
   {
     this.treasureRoom = treasureRoom;
   }

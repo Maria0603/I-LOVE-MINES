@@ -1,7 +1,7 @@
 package ProducerConsumer;
 
-import ReadersWritersProxy.ReadAddTreasureRoom;
 import ReadersWritersProxy.TreasureRoomDoor;
+import ReadersWritersProxy.WriteTreasureRoom;
 
 public class ValuableTransporter implements Runnable
 {
@@ -35,7 +35,7 @@ public class ValuableTransporter implements Runnable
       {
         //
       }
-      ReadAddTreasureRoom room=treasureRoomDoor.acquireAdd();
+      WriteTreasureRoom room=treasureRoomDoor.acquireWrite();
       int total=valuables.size();
       int value=0;
     for (int i = 0; i < total; i++)
@@ -45,8 +45,8 @@ public class ValuableTransporter implements Runnable
       valuables.remove(0);
     }
     Logger.getInstance().addLog(Thread.currentThread().getName() + " added all the valuables to the treasure room; total value: " + value );
-    treasureRoomDoor.releaseAdd(room);
-    room.add(null);
+    treasureRoomDoor.releaseWrite(room);
+
     }
   }
   public int getTotalValue()

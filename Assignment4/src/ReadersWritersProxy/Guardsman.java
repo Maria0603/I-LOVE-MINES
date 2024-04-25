@@ -76,18 +76,18 @@ public class Guardsman implements TreasureRoomDoor
       notifyAll();
   }
 
-  @Override public synchronized ReadAddTreasureRoom acquireAdd()
+  @Override public synchronized WriteTreasureRoom acquireWrite()
   {
       queue.offer(Thread.currentThread());
       Logger.getInstance().addLog(
-        Thread.currentThread().getName() + " is trying to acquire ADD; " + "readers: "
+        Thread.currentThread().getName() + " is trying to acquire WRITE; " + "readers: "
             + readers + ", writers: " + writers);
     while (queue.peek()!=Thread.currentThread())
     {
       try
       {
           Logger.getInstance().addLog(
-              Thread.currentThread().getName() + " is waiting to ADD; " + "readers: "
+              Thread.currentThread().getName() + " is waiting to WRITE; " + "readers: "
                   + readers + ", writers: " + writers);
         wait();
       }
@@ -96,7 +96,7 @@ public class Guardsman implements TreasureRoomDoor
         //  ...
       }
     }
-      Logger.getInstance().addLog(Thread.currentThread().getName() + " is the first one in the queue for adding; readers: " + readers + ", writers: " + writers);
+      Logger.getInstance().addLog(Thread.currentThread().getName() + " is the first one in the queue for writing; readers: " + readers + ", writers: " + writers);
 
     while(writers>0 || readers>0)
     {
@@ -116,80 +116,23 @@ public class Guardsman implements TreasureRoomDoor
     writers++;
     queue.remove();
     Logger.getInstance().addLog(
-        Thread.currentThread().getName() + " is ADDING; " + "readers: "
+        Thread.currentThread().getName() + " is WRITING; " + "readers: "
             + readers + ", writers: " + writers);
-    return new TreasureRoomAddProxy(treasureRoom);
+    return new TreasureRoomWriteProxy(treasureRoom);
   }
 
-  @Override public synchronized void releaseAdd(ReadAddTreasureRoom room)
+  @Override public synchronized void releaseWrite(WriteTreasureRoom room)
   {
     writers--;
-    if(room instanceof TreasureRoomAddProxy)
+    if(room instanceof TreasureRoomWriteProxy)
     {
-        TreasureRoomAddProxy treasureRoomAddProxy=(TreasureRoomAddProxy) room;
+        TreasureRoomWriteProxy treasureRoomAddProxy=(TreasureRoomWriteProxy) room;
         treasureRoomAddProxy.terminate();
     }
     Logger.getInstance().addLog(
-        Thread.currentThread().getName() + " is releasing the ADD; " + "readers: "
+        Thread.currentThread().getName() + " is releasing the WRITE; " + "readers: "
             + readers + ", writers: " + writers);
     notifyAll();
   }
-  @Override public synchronized ReadAddRetrieveTreasureRoom acquireRetrieve()
-  {
-    queue.offer(Thread.currentThread());
-    Logger.getInstance().addLog(
-        Thread.currentThread().getName() + " is trying to acquire RETRIEVE; " + "readers: "
-            + readers + ", writers: " + writers);
-    while (queue.peek()!=Thread.currentThread())
-    {
-      try
-      {
-        Logger.getInstance().addLog(
-            Thread.currentThread().getName() + " is waiting to RETRIEVE; " + "readers: "
-                + readers + ", writers: " + writers);
-        wait();
-      }
-      catch (InterruptedException e)
-      {
-        //  ...
-      }
-    }
-    Logger.getInstance().addLog(Thread.currentThread().getName() + " is the first one in the queue for retrieving; readers: " + readers + ", writers: " + writers);
 
-    while(writers>0 || readers>0)
-    {
-      try
-      {
-        Logger.getInstance().addLog(
-            Thread.currentThread().getName() + " is waiting for everyone to leave; " + "readers: "
-                + readers + ", writers: " + writers);
-        wait();
-      }
-      catch (InterruptedException e)
-      {
-        //  ...
-      }
-    }
-
-    writers++;
-    queue.remove();
-    Logger.getInstance().addLog(
-        Thread.currentThread().getName() + " is RETRIEVING; " + "readers: "
-            + readers + ", writers: " + writers);
-    return new TreasureRoomRetrieveProxy(treasureRoom);
-  }
-
-  @Override public synchronized void releaseRetrieve(ReadAddRetrieveTreasureRoom room)
-  {
-    writers--;
-    if(room instanceof TreasureRoomRetrieveProxy)
-    {
-      TreasureRoomRetrieveProxy treasureRoomRetrieveProxy=(TreasureRoomRetrieveProxy) room;
-      treasureRoomRetrieveProxy.terminate();
-    }
-    Logger.getInstance().addLog(
-        Thread.currentThread().getName() + " is releasing the RETRIEVE; " + "readers: "
-            + readers + ", writers: " + writers);
-    notifyAll();
-  }
 }

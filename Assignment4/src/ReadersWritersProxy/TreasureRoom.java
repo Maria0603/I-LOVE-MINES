@@ -4,7 +4,7 @@ import ProducerConsumer.ArrayList;
 import ProducerConsumer.ListADT;
 import ProducerConsumer.Valuable;
 
-public class TreasureRoom implements ReadAddRetrieveTreasureRoom
+public class TreasureRoom implements WriteTreasureRoom
 {
     private ListADT<Valuable> list;
     public TreasureRoom(){
