@@ -4,8 +4,6 @@ import ProducerConsumer.Valuable;
 
 public interface WriteTreasureRoom extends ReadTreasureRoom
 {
-  Valuable retrieve(Valuable v);
-  Valuable popValuableFromRoom();
+  Valuable retrieve();
   void add(Valuable v);
-  int getSize();
 }

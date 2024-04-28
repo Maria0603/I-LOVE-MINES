@@ -22,9 +22,6 @@ public class Guardsman implements TreasureRoomDoor
   @Override public synchronized ReadTreasureRoom acquireRead()
   {
     queue.offer(Thread.currentThread());
-    Logger.getInstance().addLog(
-        Thread.currentThread().getName() + " is trying to acquiring READ; "
-            + "readers: " + readers + ", writers: " + writers);
     while (queue.peek() != Thread.currentThread())
     {
       try
@@ -78,10 +75,7 @@ public class Guardsman implements TreasureRoomDoor
 
   @Override public synchronized WriteTreasureRoom acquireWrite()
   {
-      queue.offer(Thread.currentThread());
-      Logger.getInstance().addLog(
-        Thread.currentThread().getName() + " is trying to acquire WRITE; " + "readers: "
-            + readers + ", writers: " + writers);
+    queue.offer(Thread.currentThread());
     while (queue.peek()!=Thread.currentThread())
     {
       try

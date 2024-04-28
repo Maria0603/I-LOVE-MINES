@@ -18,6 +18,12 @@ public class TreasureRoomReadProxy implements ReadTreasureRoom
         return treasureRoom.read(valuableIndex);
     throw new IllegalStateException("Access denied.");
   }
+
+  @Override public int getSize()
+  {
+    return treasureRoom.getSize();
+  }
+
   public void terminate()
   {
       treasureRoom=null;

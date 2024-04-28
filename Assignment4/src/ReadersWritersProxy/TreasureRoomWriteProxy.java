@@ -25,22 +25,18 @@ public class TreasureRoomWriteProxy implements WriteTreasureRoom
       else throw new IllegalStateException("Access denied.");
   }
 
-  @Override public int getSize() {
-    return 0;
+  @Override public int getSize()
+  {
+    return treasureRoom.getSize();
   }
 
-  @Override public Valuable retrieve(Valuable v)
+  @Override public Valuable retrieve()
   {
       if(treasureRoom!=null)
-          return treasureRoom.retrieve(v);
+          return treasureRoom.retrieve();
       else throw new IllegalStateException("Access denied.");
   }
 
-  @Override public Valuable popValuableFromRoom() {
-    if(treasureRoom!=null)
-      return treasureRoom.popValuableFromRoom();
-    else throw new IllegalStateException("Access denied.");
-  }
 
   public void terminate()
   {

@@ -5,56 +5,55 @@ import ProducerConsumer.Deposit;
 import ProducerConsumer.Logger;
 import ProducerConsumer.Valuable;
 
-public class Accountant implements Runnable {
+public class Accountant implements Runnable
+{
   private TreasureRoomDoor treasureRoomDoor;
 
-  public Accountant(TreasureRoomDoor treasureRoomDoor) {
+  public Accountant(TreasureRoomDoor treasureRoomDoor)
+  {
     this.treasureRoomDoor = treasureRoomDoor;
   }
 
-  @Override public void run() {
-    while (true) {
-     /* Logger.getInstance().addLog(Thread.currentThread().getName()
-          + " is acquiring to calculate money stored in Treasure Room");*/
-
+  @Override public void run()
+  {
+    while (true)
+    {
       ReadTreasureRoom room = treasureRoomDoor.acquireRead();
-
-      /*Logger.getInstance().addLog(Thread.currentThread().getName()
-          + " starts to calculate money stored in Treasure Room");
-*/
       int moneyInTotal = 0;
       int index = 0;
+      int valuables=room.getSize();
 
-      while (true){
+      for(int i=0; i<valuables; i++)
+      {
         Valuable gemFromTreasureRoom = room.read(index);
-
-        if(gemFromTreasureRoom == null){
+        if (gemFromTreasureRoom == null)
+        {
           break;
-      } else {
+        }
+        else
+        {
           moneyInTotal += gemFromTreasureRoom.getValue();
           index++;
-          takeTimeToCalculate(1);
-
+          takesTime(1);
         }
       }
 
-      Logger.getInstance().addLog(Thread.currentThread().getName() + " has calculated all the money from the treasure room: " + moneyInTotal  + "$");
+      Logger.getInstance().addLog(Thread.currentThread().getName()
+          + " has calculated the value of the valuables in the treasure room: $"
+          + moneyInTotal);
       treasureRoomDoor.releaseRead(room);
-
-      try {
-        Thread.sleep(1000);
-      }
-      catch (InterruptedException e) {
-        //
-      }
-
+      takesTime(1);
     }
   }
 
-  private void takeTimeToCalculate(int seconds) {
-    try {
+  private void takesTime(int seconds)
+  {
+    try
+    {
       Thread.sleep(seconds * 1000);
-    } catch (InterruptedException e) {/* empty*/ }
+    }
+    catch (InterruptedException e)
+    {/* empty*/ }
   }
 
 }
