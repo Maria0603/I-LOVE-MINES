@@ -12,10 +12,10 @@ public class TreasureRoomReadProxy implements ReadTreasureRoom
     this.treasureRoom = treasureRoom;
   }
 
-  @Override public Valuable read()
+  @Override public Valuable read(int valuableIndex)
   {
     if (treasureRoom!=null)
-        return treasureRoom.read();
+        return treasureRoom.read(valuableIndex);
     throw new IllegalStateException("Access denied.");
   }
   public void terminate()

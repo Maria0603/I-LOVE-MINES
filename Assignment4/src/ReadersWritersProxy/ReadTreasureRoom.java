@@ -4,5 +4,5 @@ import ProducerConsumer.Valuable;
 
 public interface ReadTreasureRoom
 {
-    Valuable read();
+    Valuable read(int valuableIndex);
 }

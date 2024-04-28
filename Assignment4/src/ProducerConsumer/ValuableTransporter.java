@@ -1,5 +1,6 @@
 package ProducerConsumer;
 
+import ReadersWritersProxy.TreasureRoom;
 import ReadersWritersProxy.TreasureRoomDoor;
 import ReadersWritersProxy.WriteTreasureRoom;
 

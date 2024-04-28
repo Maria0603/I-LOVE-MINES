@@ -17,7 +17,7 @@ public class Miner implements Runnable
       deposit.depositValuable(valuable);
       try
       {
-        Thread.sleep(1000);
+        Thread.sleep(5000);
       }
       catch(InterruptedException e)
       {
