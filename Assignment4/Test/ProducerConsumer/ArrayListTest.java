@@ -647,7 +647,7 @@ class ArrayListTest<T>
     Z2 - set element at index 0 in ArrayList with 3 elements
     O - set element at index 1
     M1 - set 3 elements in ArrayList with 4 elements
-    M2 - set null element in ArrayList with 4 elements //TODO
+    M2 - set null element in ArrayList with 4 elements
     B1 - set element at index -1 - expect exception
     B2 - set element at index 2 in ArrayList with 3 elements
     B3 - set element at index 2 in ArrayList with 2 elements - expect exception
@@ -698,6 +698,17 @@ class ArrayListTest<T>
     assertDoesNotThrow(() -> arrayList.set(3, "Z"));
     assertEquals(4, arrayList.size());
     assertEquals("{X, B, Y, Z}", arrayList.toString());
+  }
+
+  @Test void set_Null_Element_InFull_Array(){
+    arrayList.add("A");
+    arrayList.add("B");
+    arrayList.add("C");
+    arrayList.add("D");
+
+    assertDoesNotThrow(() -> arrayList.set(0, null));
+    assertEquals(4, arrayList.size());
+    assertEquals("{null, B, C, D}", arrayList.toString());
   }
 
   //  Passed
@@ -761,8 +772,8 @@ class ArrayListTest<T>
   }
 
 
- /*
-//TODO: Left for Mathias
+
+/*TODO: Left for Mathias
 12. size()
 Z - check size for empty ArrayList - expect 0
 O1 - check size for ArrayList with 1 element - expect 1
@@ -770,9 +781,56 @@ O2 - check size for ArrayList with 1 null element - expect 1
 M - check size for ArrayList with 3 elements - expect 3
 B1 - check size for ArrayList with 16 elements - expect 16
 B2 - check size for ArrayList with 17 elements - expect 17
-E - none
+E - none*/
 
-  14.
+  // Test case: check size for empty ArrayList - expect 0
+    @Test
+    void size_EmptyArrayList_ReturnsZero() {
+        assertEquals(0, arrayList.size());
+    }
+
+    // Test case: check size for ArrayList with 1 element - expect 1
+    @Test
+    void size_ArrayListWithOneElement_ReturnsOne() {
+        arrayList.add("Element");
+        assertEquals(1, arrayList.size());
+    }
+
+    // Test case: check size for ArrayList with 1 null element - expect 1
+    @Test
+    void size_ArrayListWithOneNullElement_ReturnsOne() {
+        arrayList.add(null);
+        assertEquals(1, arrayList.size());
+    }
+
+    // Test case: check size for ArrayList with 3 elements - expect 3
+    @Test
+    void size_ArrayListWithThreeElements_ReturnsThree() {
+        arrayList.add("Element1");
+        arrayList.add("Element2");
+        arrayList.add("Element3");
+        assertEquals(3, arrayList.size());
+    }
+
+    // Test case: check size for ArrayList with 16 elements - expect 16
+    @Test
+    void size_ArrayListWithSixteenElements_ReturnsSixteen() {
+        for (int i = 0; i < 16; i++) {
+            arrayList.add("Element" + i);
+        }
+        assertEquals(16, arrayList.size());
+    }
+
+    // Test case: check size for ArrayList with 17 elements - expect 17
+    @Test
+    void size_ArrayListWithSeventeenElements_ReturnsSeventeen() {
+        for (int i = 0; i < 17; i++) {
+            arrayList.add("Element" + i);
+        }
+        assertEquals(17, arrayList.size());
+    }
+
+  /*14.
  public T remove(int index)
  {
    //Test case: index<0
@@ -795,5 +853,64 @@ E - none
    return result;
  }
 */
+
+  // Test case: index<0 - expect IndexOutOfBoundsException
+  @Test
+  void remove_IndexLessThanZero_ExceptionThrown() {
+    arrayList.add("Element");
+    assertThrows(IndexOutOfBoundsException.class, () -> arrayList.remove(-1));
+  }
+
+  // Test case: index>size-1 - expect IndexOutOfBoundsException
+  @Test
+  void remove_IndexGreaterThanSize_ExceptionThrown() {
+    arrayList.add("Element");
+    assertThrows(IndexOutOfBoundsException.class, () -> arrayList.remove(1));
+  }
+
+  // Test case: index>=0 and index<=size-1 - expect element removed and correct size
+  @Test
+  void remove_ValidIndex_ElementRemoved() {
+    arrayList.add("Element1");
+    arrayList.add("Element2");
+    arrayList.add("Element3");
+
+    String removedElement = arrayList.remove(1);
+    assertEquals("Element2", removedElement);
+    assertEquals(2, arrayList.size());
+  }
+
+  // Test case: index=0 and size=1 - expect element removed and size=0
+  @Test
+  void remove_IndexZeroAndSizeOne_ElementRemoved() {
+    arrayList.add("Element");
+    String removedElement = arrayList.remove(0);
+    assertEquals("Element", removedElement);
+    assertEquals(0, arrayList.size());
+  }
+
+  // Test case: index=0 and size>1 - expect element removed and correct size
+  @Test
+  void remove_IndexZeroAndSizeGreaterThanOne_ElementRemoved() {
+    arrayList.add("Element1");
+    arrayList.add("Element2");
+    arrayList.add("Element3");
+
+    String removedElement = arrayList.remove(0);
+    assertEquals("Element1", removedElement);
+    assertEquals(2, arrayList.size());
+  }
+
+  // Test case: index=1 and size>index - expect element removed and correct size
+  @Test
+  void remove_IndexOneAndSizeGreaterThanIndex_ElementRemoved() {
+    arrayList.add("Element1");
+    arrayList.add("Element2");
+    arrayList.add("Element3");
+
+    String removedElement = arrayList.remove(1);
+    assertEquals("Element2", removedElement);
+    assertEquals(2, arrayList.size());
+  }
 
 }
