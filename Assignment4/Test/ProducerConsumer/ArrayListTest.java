@@ -670,6 +670,17 @@ class ArrayListTest<T>
     assertEquals("{X, B, Y, Z}", arrayList.toString());
   }
 
+  @Test void set_Null_Element_InFull_Array(){
+    arrayList.add("A");
+    arrayList.add("B");
+    arrayList.add("C");
+    arrayList.add("D");
+
+    assertDoesNotThrow(() -> arrayList.set(0, null));
+    assertEquals(4, arrayList.size());
+    assertEquals("{null, B, C, D}", arrayList.toString());
+  }
+
   //  Passed
   @Test void set_At_Negative_Index()
   {
