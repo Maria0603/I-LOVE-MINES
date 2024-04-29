@@ -109,7 +109,7 @@ public class ArrayList<T> implements ListADT<T>
    {
       if (index < 0 || index > size - 1)
       {
-         throw new IllegalStateException("index:" + index);
+         throw new IndexOutOfBoundsException("index:" + index);
       }
       return list[index];
    }
