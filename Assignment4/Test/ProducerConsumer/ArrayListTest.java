@@ -617,7 +617,7 @@ class ArrayListTest<T>
     Z2 - set element at index 0 in ArrayList with 3 elements
     O - set element at index 1
     M1 - set 3 elements in ArrayList with 4 elements
-    M2 - set null element in ArrayList with 4 elements //TODO
+    M2 - set null element in ArrayList with 4 elements
     B1 - set element at index -1 - expect exception
     B2 - set element at index 2 in ArrayList with 3 elements
     B3 - set element at index 2 in ArrayList with 2 elements - expect exception
