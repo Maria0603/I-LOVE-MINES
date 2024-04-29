@@ -17,7 +17,6 @@ public class Logger
       {
         if (instance == null)
         {
-
           instance = new Logger();
         }
       }
@@ -29,5 +28,4 @@ public class Logger
   {
     System.out.println(text);
   }
-
 }

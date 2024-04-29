@@ -53,6 +53,7 @@ public class Deposit
         e.printStackTrace();
       }
     }
+
     Valuable valuable = list.remove(list.size() - 1);
     Logger.getInstance().addLog(
         Thread.currentThread().getName() + " extracted a " + valuable

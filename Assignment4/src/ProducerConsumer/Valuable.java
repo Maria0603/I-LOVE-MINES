@@ -8,6 +8,8 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Valuable
 {
   private static Map<String, Valuable> valuableMap = new HashMap<>();
+  // [ {"diamond", new Valuable("diamond", 150) } ]
+  // map.get("diamond") -> Valuable("diamond", 150)
   private static Lock lock = new ReentrantLock();
   private String name;
   private int value;
