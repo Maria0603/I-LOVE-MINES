@@ -289,7 +289,7 @@ class ArrayListTest<T>
   Z2 - get element at index 0 in ArrayList with 3 elements
   O - get element at index 1 in ArrayList with 3 elements
   M1 - get element at index 3 in ArrayList with 5 elements
-  M2 - get null element at index 3 in ArrayList with 5 elements //TODO
+  M2 - get null element at index 3 in ArrayList with 5 elements
   B1 - get element at index -1 - expect exception
   B2 - get element at index 3 in ArrayList with 2 elements
   B3 - get element at index 3 in ArrayList with 1 element - expect exception
@@ -337,6 +337,16 @@ class ArrayListTest<T>
     assertEquals("d", arrayList.get(3));
   }
 
+  @Test void getThirdNullIndexElementFromFilledWithFive()
+  {
+    //M - get element at index 3 in ArrayList with 5 elements
+    arrayList.add("a");
+    arrayList.add("b");
+    arrayList.add("c");
+    arrayList.add(null);
+    arrayList.add("e");
+    assertEquals(null, arrayList.get(3));
+  }
   //Unexpected exception type thrown ==> expected: <java.lang.IndexOutOfBoundsException> but was: <java.lang.IllegalStateException>
   //Failed
   @Test void getMinusIndexElement()
@@ -372,8 +382,8 @@ class ArrayListTest<T>
   O - index of element in ArrayList with 1 element - expect found
   M1 - index of element in ArrayList with 3 elements - expect found
   M2 - index of element in ArrayList with 3 elements - expect not found
-  M3 - index of element "A" in ArrayList with "A", "B", "A", "C" elements - to return the first occurrence//TODO
-  M4 - index of element null in ArrayList with "A", null, "A", "C" elements //TODO
+  M3 - index of element "A" in ArrayList with "A", "B", "A", "C" elements - to return the first occurrence
+  M4 - index of element null in ArrayList with "A", null, "A", "C" elements
   B - tested in Zero
   E - none
    */
@@ -394,13 +404,13 @@ class ArrayListTest<T>
   }
 
   //Passed
-  @Test void indexOfElementInFilledWithThree()
+  @Test void indexOfNullElementInFilledWithThreeAndNull()
   {
-    //M1 - index of element in ArrayList with 3 elements - expect found
+    //M2 - index of element in ArrayList with 3 elements - expect not found
     arrayList.add("a");
     arrayList.add("b");
     arrayList.add("c");
-    assertEquals(1, arrayList.indexOf("b"));
+    assertEquals(-1, arrayList.indexOf("d"));
   }
 
   //Passed
@@ -411,6 +421,26 @@ class ArrayListTest<T>
     arrayList.add("b");
     arrayList.add("c");
     assertEquals(-1, arrayList.indexOf("d"));
+  }
+
+  @Test void indexOfElementInFilledWithThreeWithRepetitions()
+  {
+    //M3 - index of element "A" in ArrayList with "A", "B", "A", "C" elements - to return the first occurrence
+    arrayList.add("a");
+    arrayList.add("b");
+    arrayList.add("a");
+    arrayList.add("c");
+    assertEquals(0, arrayList.indexOf("a"));
+  }
+
+  @Test void indexOfElementInFilledWithThreeAndNull()
+  {
+   // M4 - index of element null in ArrayList with "A", null, "A", "C" elements
+    arrayList.add("a");
+    arrayList.add(null);
+    arrayList.add("a");
+    arrayList.add("c");
+    assertEquals(1, arrayList.indexOf(null));
   }
 
   /*
